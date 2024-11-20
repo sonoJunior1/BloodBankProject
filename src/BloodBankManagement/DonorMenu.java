@@ -96,8 +96,6 @@ public class DonorMenu extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(204, 0, 0));
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "More", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 24), new java.awt.Color(204, 0, 0))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 430, 220));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pngegg (28).png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 540, 170, 170));
 
         jLabel2.setBackground(new java.awt.Color(204, 0, 0));

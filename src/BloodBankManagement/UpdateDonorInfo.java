@@ -424,6 +424,22 @@ public class UpdateDonorInfo extends javax.swing.JInternalFrame {
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
+        first.setText("");
+        last.setText("");
+        middle.setText("");
+        gender.setText("");
+        bloodtype.setText("");
+        addr.setText("");
+        city.setText("");
+        dob.setText("");
+        dob1.setText("");
+        email.setText("");
+        state1.setText("");
+        tel.setText("");
+        place.setText("");
+        zip.setText("");
+        
+    
     }//GEN-LAST:event_clearActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
@@ -433,34 +449,49 @@ public class UpdateDonorInfo extends javax.swing.JInternalFrame {
         ResultSet rs = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(
+                    "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
 
-            String query = "SELECT * FROM registration WHERE idRegistration = ? OR lastname = ?";
+            String query = "SELECT * FROM Registration WHERE DonorID = ? OR LastName = ?";
             String donorValue = searchField.getText();  // Corrected typo from `searchFiedl` to `searchField`
+
             search = con.prepareStatement(query);
-            search.setString(1, donorValue);
-            search.setString(2, donorValue);
+
+            // Check if donorValue can be parsed as an integer (for DonorID)
+            try {
+                int donorID = Integer.parseInt(donorValue);  // Try to parse it as an integer
+                search.setInt(1, donorID);  // Set it for DonorID
+            } catch (NumberFormatException e) {
+                search.setNull(1, java.sql.Types.INTEGER);  // If not a valid integer, set as null
+            }
+
+            search.setString(2, donorValue);  // Set LastName as a string
 
             rs = search.executeQuery();
 
             if (rs.next()) {
-                // Populate fields with the found donor's data
-                first.setText(rs.getString("firstname"));
-                last.setText(rs.getString("lastname"));
-                middle.setText(rs.getString("middlename"));
-                gender1.setText(rs.getString("gender"));
-                bloodtype1.setText(rs.getString("bloodtype"));
-                bloodtype.setText(rs.getString("bloodtype"));   
-                addr.setText(rs.getString("address"));
-                city.setText(rs.getString("city"));
-                dob.setText(rs.getString("dob"));
-                email.setText(rs.getString("email"));
-                state1.setText(rs.getString("state"));
-                tel.setText(rs.getString("telephone"));
-                place1.setText(rs.getString("placeofbirth"));
-                zip.setText(rs.getString("zip"));
-                // Uncomment email field if needed: email.setText(rs.getString("email"));
+                
+                first.setText(rs.getString("FirstName"));
+                last.setText(rs.getString("LastName"));
+                middle.setText(rs.getString("MiddleName"));
+                gender1.setText(rs.getString("Sex"));
+                gender.setText(rs.getString("Sex"));
+                bloodtype1.setText(rs.getString("BloodType"));
+                bloodtype.setText(rs.getString("BloodType"));
+                addr.setText(rs.getString("DonorAddr"));
+                city.setText(rs.getString("City"));
+                dob.setText(rs.getString("DateOfBirth"));
+                dob1.setText(rs.getString("DateOfBirth"));
+                email.setText(rs.getString("Email"));
+                state1.setText(rs.getString("states"));
+                tel.setText(rs.getString("Telephone"));
+                place1.setText(rs.getString("PlaceOfBirth"));
+                place.setText(rs.getString("PlaceOfBirth"));
+                zip.setText(rs.getString("Zip"));
+
+                
 
                 JOptionPane.showMessageDialog(this, "Donor Found");
             } else {
@@ -479,7 +510,8 @@ public class UpdateDonorInfo extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(UpdateDonorInfo.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }
+        }
+
         
         
         
@@ -501,7 +533,7 @@ public class UpdateDonorInfo extends javax.swing.JInternalFrame {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
 
-                String query = "UPDATE registration SET firstname = ?, lastname = ?, middlename = ?, address = ?, city = ?, telephone = ?, email = ?, zip = ?, state = ? WHERE idRegistration = ?";
+                String query = "UPDATE registration SET firstname = ?, lastname = ?, middlename = ?, address = ?, city = ?, telephone = ?, email = ?, zip = ?, state = ? WHERE DonorId = ?";
                 String donorId = searchField.getText(); // Assume donor ID is in searchField
 
                 // Prepare the statement

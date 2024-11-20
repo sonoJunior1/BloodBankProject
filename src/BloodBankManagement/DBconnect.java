@@ -20,7 +20,7 @@ public class DBconnect {
         PreparedStatement insert;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata","root", "root");          
+            con = DriverManager.getConnection("jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;user=csiadmin@bloodbankdata;password=7ousRespo3!;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;","csiadmin", "7ousRespo3!");          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBconnect.class.getName()).log(Level.SEVERE, null, ex);
         }

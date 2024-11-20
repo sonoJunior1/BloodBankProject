@@ -38,8 +38,10 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        searchField = new javax.swing.JTextField();
+        searchFieldLastName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        searchFieldDOB = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         first = new javax.swing.JLabel();
         last = new javax.swing.JLabel();
@@ -47,11 +49,11 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         middle = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        dob = new javax.swing.JLabel();
+        DateBirth = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         gender = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        place = new javax.swing.JLabel();
+        place1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -62,7 +64,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         addr = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         zip = new javax.swing.JLabel();
-        state = new javax.swing.JLabel();
+        state1 = new javax.swing.JLabel();
         city = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         tel = new javax.swing.JLabel();
@@ -86,10 +88,10 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 15))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jLabel4.setText("Donor ID or Lastname:*");
+        jLabel4.setText("Date of Birth: *");
 
-        searchField.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        searchField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        searchFieldLastName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        searchFieldLastName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,17 +100,34 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel15.setText("Donor ID or Lastname:*");
+
+        searchFieldDOB.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        searchFieldDOB.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(searchFieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(searchFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(555, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,13 +135,23 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(searchFieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(176, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 47, 750, 270));
@@ -157,9 +186,9 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jLabel9.setText("Date of Birth:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 247, 104, 40));
 
-        dob.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        dob.setText("000000");
-        getContentPane().add(dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 250, 188, 36));
+        DateBirth.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        DateBirth.setText("000000");
+        getContentPane().add(DateBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 250, 188, 36));
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel5.setText("Sex:");
@@ -173,9 +202,9 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jLabel6.setText("Place of Birth:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 340, 108, 27));
 
-        place.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        place.setText("000000");
-        getContentPane().add(place, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 169, 36));
+        place1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        place1.setText("000000");
+        getContentPane().add(place1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 169, 36));
 
         jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel10.setText("Address:");
@@ -217,9 +246,9 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         zip.setText("000000");
         getContentPane().add(zip, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 390, 115, 36));
 
-        state.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        state.setText("000000");
-        getContentPane().add(state, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 400, 115, 36));
+        state1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        state1.setText("000000");
+        getContentPane().add(state1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 400, 115, 36));
 
         city.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         city.setText("000000");
@@ -261,57 +290,119 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_clearActionPerformed
+        first.setText("");
+        last.setText("");
+        middle.setText("");
+        gender.setText("");
+        bloodtype.setText("");
+        addr.setText("");
+        city.setText("");
+        DateBirth.setText("");
+        email.setText("");
+        state1.setText("");
+        tel.setText("");
+        place1.setText("");
+        zip.setText("");
+        searchFieldLastName.setText("");
+        searchFieldDOB.setText("");
+        delete.setEnabled(false);  // Disable the delete button again
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Connection con = null;
-        PreparedStatement search = null;
-        ResultSet rs = null;
+    }//GEN-LAST:event_clearActionPerformed
+    
+    public void deleteDonorByID(Connection con, int donorID) {
+        PreparedStatement delete = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
+            // Query to delete donor by DonorID
+            String deleteQuery = "DELETE FROM Registration WHERE DonorID = ?";
+            delete = con.prepareStatement(deleteQuery);
+            delete.setInt(1, donorID);
 
-            String query = "SELECT * FROM registration WHERE idRegistration = ? OR lastname = ?";
-            String donorValue = searchField.getText();  // Corrected typo from `searchFiedl` to `searchField`
-            search = con.prepareStatement(query);
-            search.setString(1, donorValue);
-            search.setString(2, donorValue);
+            // Execute the delete statement
+            int rowsAffected = delete.executeUpdate();
 
-            rs = search.executeQuery();
-
-            if (rs.next()) {
-                // Populate fields with the found donor's data
-                first.setText(rs.getString("firstname"));
-                last.setText(rs.getString("lastname"));
-                middle.setText(rs.getString("middlename"));
-                gender.setText(rs.getString("gender"));
-                bloodtype.setText(rs.getString("bloodtype"));
-                addr.setText(rs.getString("address"));
-                city.setText(rs.getString("city"));
-                dob.setText(rs.getString("dob"));
-                // Uncomment email field if needed: email.setText(rs.getString("email"));
-
-                JOptionPane.showMessageDialog(this, "Donor Found");
+            if (rowsAffected > 0) {
+                System.out.println("Donor deleted successfully.");
             } else {
-                JOptionPane.showMessageDialog(this, "Donor not Found");
+                System.out.println("Failed to delete donor.");
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBconnect.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteDonor.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Close resources in reverse order of opening
+            // Close resources
             try {
-                if (rs != null) rs.close();
-                if (search != null) search.close();
-                if (con != null) con.close();
+                if (delete != null) delete.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteDonor.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
     }
-        
+
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            Connection con = null;
+            PreparedStatement search = null;
+            ResultSet rs = null;
+
+            try {
+                // Establish connection to the database
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                con = DriverManager.getConnection(
+                        "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                        "csiadmin", "7ousRespo3!");
+
+                // Get the search values (LastName and DateOfBirth) from user input fields
+                String lastName = searchFieldLastName.getText();  // Get the Last Name
+                String dob = searchFieldDOB.getText();  // Get the Date of Birth (format YYYY-MM-DD)
+
+                // Query to search for donors by LastName and DateOfBirth
+                String query = "SELECT * FROM Registration WHERE LastName = ? AND DateOfBirth = ?";
+                search = con.prepareStatement(query);
+                search.setString(1, lastName);
+                search.setString(2, dob);
+
+                // Execute the query and get the results
+                rs = search.executeQuery();
+
+                // If results are found, display the donor's data
+                if (rs.next()) {
+                    // Populate the fields with the donor's data
+                    first.setText(rs.getString("FirstName"));
+                    last.setText(rs.getString("LastName"));
+                    middle.setText(rs.getString("MiddleName"));
+                    gender.setText(rs.getString("Sex"));
+                    bloodtype.setText(rs.getString("BloodType"));
+                    addr.setText(rs.getString("DonorAddr"));
+                    city.setText(rs.getString("City"));
+                    DateBirth.setText(rs.getString("DateOfBirth"));
+                    email.setText(rs.getString("Email"));
+                    state1.setText(rs.getString("States"));
+                    tel.setText(rs.getString("Telephone"));
+                    place1.setText(rs.getString("PlaceOfBirth"));
+                    zip.setText(rs.getString("Zip"));
+
+                    // Enable the Delete button after a donor is found
+                    delete.setEnabled(true);
+                    JOptionPane.showMessageDialog(this, "Donor Found");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Donor not found");
+                    delete.setEnabled(false);  // Disable the delete button if no donor is found
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DBconnect.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(SearchDonor.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                // Close resources
+                try {
+                    if (rs != null) rs.close();
+                    if (search != null) search.close();
+                    if (con != null) con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchDonor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         
         
         
@@ -319,73 +410,72 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
-        // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this donor?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
-    
-    // Proceed only if the user clicks "Yes"
-    if (confirm == JOptionPane.YES_OPTION) {
         Connection con = null;
-        PreparedStatement deleteStmt = null;
-        
+        PreparedStatement delete = null;
+
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
-            
-            String query = "DELETE FROM registration WHERE idRegistration = ? OR lastname = ?";
-            String donorValue = searchField.getText();  // Get input from searchField
-            deleteStmt = con.prepareStatement(query);
-            deleteStmt.setString(1, donorValue);
-            deleteStmt.setString(2, donorValue);
-            
-            int rowsAffected = deleteStmt.executeUpdate();
-            
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Donor deleted successfully.");
-                // Optionally clear fields after deletion
-                first.setText("");
-                last.setText("");
-                middle.setText("");
-                gender.setText("");
-                bloodtype.setText("");
-                addr.setText("");
-                city.setText("");
-                dob.setText("");
-                // Clear other fields if needed
+            // Get the LastName and DateOfBirth from the displayed fields
+            String lastName = last.getText();  // Last Name field
+            String dob = searchFieldDOB.getText();  // Date of Birth field (format YYYY-MM-DD)
+
+            // Establish connection to the database
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection(
+                    "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
+
+            // Query to find the DonorID by matching LastName and DateOfBirth
+            String query = "SELECT DonorID FROM Registration WHERE LastName = ? AND DateOfBirth = ?";
+            PreparedStatement search = con.prepareStatement(query);
+            search.setString(1, lastName);
+            search.setString(2, dob);
+
+            ResultSet rs = search.executeQuery();
+            if (rs.next()) {
+                int donorID = rs.getInt("DonorID");
+
+                // Now delete the donor using the DonorID
+                String deleteQuery = "DELETE FROM Registration WHERE DonorID = ?";
+                delete = con.prepareStatement(deleteQuery);
+                delete.setInt(1, donorID);
+
+                int rowsAffected = delete.executeUpdate();
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(this, "Donor deleted successfully.");
+                    // Optionally, clear the form after deletion
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete donor.");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Donor not found. Deletion failed.");
+                JOptionPane.showMessageDialog(this, "No matching donor found to delete.");
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBconnect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteDonor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DeleteDonor.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Close resources to prevent memory leaks
             try {
-                if (deleteStmt != null) deleteStmt.close();
+                if (delete != null) delete.close();
                 if (con != null) con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DeleteDonor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    } else {
-        // User selected "No," so we skip the deletion process
-        JOptionPane.showMessageDialog(this, "Deletion cancelled.");
-    }
+
         
-        
-        
+
         
         
     }//GEN-LAST:event_deleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DateBirth;
     private javax.swing.JLabel addr;
     private javax.swing.JLabel bloodtype;
     private javax.swing.JLabel city;
     private javax.swing.JButton clear;
     private javax.swing.JButton delete;
-    private javax.swing.JLabel dob;
     private javax.swing.JLabel email;
     private javax.swing.JLabel first;
     private javax.swing.JLabel gender;
@@ -396,6 +486,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -410,9 +501,10 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel last;
     private javax.swing.JLabel last1;
     private javax.swing.JLabel middle;
-    private javax.swing.JLabel place;
-    private javax.swing.JTextField searchField;
-    private javax.swing.JLabel state;
+    private javax.swing.JLabel place1;
+    private javax.swing.JTextField searchFieldDOB;
+    private javax.swing.JTextField searchFieldLastName;
+    private javax.swing.JLabel state1;
     private javax.swing.JLabel tel;
     private javax.swing.JLabel zip;
     // End of variables declaration//GEN-END:variables
