@@ -4,6 +4,13 @@
  */
 package BloodBankManagement;
 
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Souleymane.Sono
@@ -30,25 +37,30 @@ public class NewUserForm extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        firstName = new javax.swing.JTextField();
+        lastName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        middleName = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Accountstatus = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        jTextField25 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jTextField26 = new javax.swing.JTextField();
+        telephone = new javax.swing.JTextField();
+        add = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
+        username = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jTextField27 = new javax.swing.JTextField();
+        password = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        Role = new javax.swing.JComboBox<>();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 18), new java.awt.Color(204, 0, 0))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 1050));
@@ -64,57 +76,57 @@ public class NewUserForm extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel5.setText("Account Status");
 
-        jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        firstName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        firstName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jTextField5.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lastName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        lastName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel7.setText("Last Name:*");
 
-        jTextField6.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        middleName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        middleName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel8.setText("Middle Name:*");
 
-        jComboBox1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select ", "Active", "Lock", "Unlock" }));
+        Accountstatus.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        Accountstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select ", "Active", "Lock", "Unlock" }));
 
         jLabel28.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel28.setText("Email:");
 
-        jTextField24.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        email.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel29.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel29.setText("Telephone:");
 
-        jTextField25.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        telephone.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        telephone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jButton5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jButton5.setText("Add");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        add.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(255, 0, 0));
-        jButton6.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Clear");
+        clear.setBackground(new java.awt.Color(255, 0, 0));
+        clear.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        clear.setForeground(new java.awt.Color(255, 255, 255));
+        clear.setText("Clear");
 
-        jTextField26.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        username.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel30.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel30.setText("Username:");
 
-        jTextField27.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jTextField27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        password.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel31.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel31.setText("Password:");
@@ -122,8 +134,8 @@ public class NewUserForm extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         jLabel6.setText("Role Type:");
 
-        jComboBox2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select ", "Admin", "Guest User" }));
+        Role.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        Role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select ", "Admin", "Guess User" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -134,24 +146,24 @@ public class NewUserForm extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Accountstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(middleName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Role, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,8 +174,8 @@ public class NewUserForm extends javax.swing.JInternalFrame {
                             .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,13 +185,13 @@ public class NewUserForm extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel30))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField27)
-                                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(password)
+                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(142, 142, 142)
-                                .addComponent(jButton5)
+                                .addComponent(add)
                                 .addGap(40, 40, 40)
-                                .addComponent(jButton6))
+                                .addComponent(clear))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(208, 208, 208)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -190,46 +202,46 @@ public class NewUserForm extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(middleName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Accountstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Role, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(add)
+                    .addComponent(clear))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
 
@@ -259,19 +271,76 @@ public class NewUserForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
 
         //JOptionPane.showConfirmDialog(this, "Added", JOptionPane.OK_CANCEL_OPTION);
+        String fName = firstName.getText();
+        String lName = lastName.getText();
+        String mName = middleName.getText();
+        String emailAddress = email.getText();
+        String phone = telephone.getText();
+        String user = username.getText();
+        String pass = password.getText();
+        String status = (String) Accountstatus.getSelectedItem();
+        String role = (String) Role.getSelectedItem();
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+        // Check if all fields are filled
+        if (fName.isEmpty() || lName.isEmpty() || user.isEmpty() || pass.isEmpty() || role.equals("Select") || status.equals("Select")) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Define the query for admin or guest user
+        String query = "";
+        if (role.equals("Admin")) {
+            query = "INSERT INTO admin (username, password, firstName, lastName, middleName, email, telephone, accountStatus, role) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        } else if (role.equals("Guest User")) {
+            query = "INSERT INTO GuestUser (username, password, firstName, lastName, middleName, email, telephone, accountStatus, role) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        }
+
+        try (Connection con = DriverManager.getConnection(
+                    "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            // Set parameters for the query
+            pst.setString(1, user);       // username
+            pst.setString(2, pass);       // password
+            pst.setString(3, fName);      // firstName
+            pst.setString(4, lName);      // lastName
+            pst.setString(5, mName);      // middleName
+            pst.setString(6, emailAddress); // email
+            pst.setString(7, phone);      // telephone
+            pst.setString(8, status);     // accountStatus
+            pst.setString(9, role);       // role
+
+            // Execute the query
+            int result = pst.executeUpdate();
+
+            // Check if the insert was successful
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "User added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error adding user.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Print stack trace for debugging
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_addActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> Accountstatus;
+    private javax.swing.JComboBox<String> Role;
+    private javax.swing.JButton add;
+    private javax.swing.JButton clear;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -284,12 +353,10 @@ public class NewUserForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lastName;
+    private javax.swing.JTextField middleName;
+    private javax.swing.JTextField password;
+    private javax.swing.JTextField telephone;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

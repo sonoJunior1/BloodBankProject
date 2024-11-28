@@ -147,7 +147,7 @@ public class AddBlood extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 130, 30));
 
         BloodField.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        BloodField.setText("Bloof Type:");
+        BloodField.setText("Blood Type:");
         getContentPane().add(BloodField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 130, 30));
 
         collectorAddress.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N

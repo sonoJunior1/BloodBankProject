@@ -1,6 +1,13 @@
 
 package BloodBankManagement;
 
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.*;
+
 /**
  *
  * @author souleymane.sono
@@ -29,8 +36,8 @@ public class LoginPage extends javax.swing.JFrame {
         pane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        loginUsername = new javax.swing.JTextField();
+        loginPassword = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -42,6 +49,9 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("BLOOD BANK MANAGEMENT");
+        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BloodBankManagement/blood.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,21 +60,21 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel3)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 830));
@@ -75,10 +85,9 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Book Antiqua", 0, 24)); // NOI18N
         jLabel2.setText("Username:");
 
-        jTextField1.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
+        loginUsername.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
+        loginPassword.setFont(new java.awt.Font("Book Antiqua", 0, 18)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
@@ -110,8 +119,8 @@ public class LoginPage extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))))
+                            .addComponent(loginUsername)
+                            .addComponent(loginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         paneLayout.setVerticalGroup(
@@ -122,11 +131,11 @@ public class LoginPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(79, Short.MAX_VALUE))
@@ -139,12 +148,192 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Menu mm = new Menu();
-        mm.setVisible(true);
-       
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+        /*
+        String username = loginUsername.getText(); 
+        String password = new String(loginPassword.getPassword()); // Assuming password is in a JPasswordField
 
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter both username and password", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Assuming `Connection con` is your database connection object
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
+
+            // Query to check if the user is an Admin or Guest User and validate credentials
+            String queryAdmin = "SELECT * FROM admin WHERE username = ? AND password = ?";
+            String queryGuest = "SELECT * FROM GuestUser WHERE username = ? AND password = ?";
+
+            // Check for Admin first
+            PreparedStatement pstAdmin = con.prepareStatement(queryAdmin);
+            pstAdmin.setString(1, username);
+            pstAdmin.setString(2, password);
+            ResultSet rsAdmin = pstAdmin.executeQuery();
+
+            if (rsAdmin.next()) {  // If an Admin is found
+                JOptionPane.showMessageDialog(this, "Login successful as Admin", "Success", JOptionPane.INFORMATION_MESSAGE);
+                // Redirect to Admin Dashboard or next screen
+                // e.g., AdminDashboard.show(); 
+                Menu mm = new Menu();
+                mm.setVisible(true);
+            } else {
+                // If Admin doesn't match, check GuestUser
+                PreparedStatement pstGuest = con.prepareStatement(queryGuest);
+                pstGuest.setString(1, username);
+                pstGuest.setString(2, password);
+                ResultSet rsGuest = pstGuest.executeQuery();
+
+                if (rsGuest.next()) {  // If a Guest User is found
+                    JOptionPane.showMessageDialog(this, "Login successful as Guest User", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    // Redirect to Guest User Dashboard or next screen
+                    // e.g., GuestDashboard.show();
+                    Menu mm = new Menu();
+                    mm.setVisible(true);
+                } else {
+                    // If no user found in both tables
+                    JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Driver not found: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        */
+        /*
+        String username = loginUsername.getText();  // Get username
+        String password = new String(loginPassword.getPassword());  // Get password
+
+        // Get user role after validating login
+        String userRole = getUserRole(username, password);
+
+        if (userRole != null) {
+            // Successfully authenticated, pass the role to the Menu screen
+            Menu menu = new Menu(userRole);  // Pass user role (Admin or Guest)
+            menu.setVisible(true);  // Show the Menu
+            this.dispose();  // Close the login page
+        } else {
+            // Show error message for invalid credentials
+            JOptionPane.showMessageDialog(this, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+  
+       */
+        String username = loginUsername.getText();  // Get username
+    String password = new String(loginPassword.getPassword());  // Get password
+
+    // Get user role after validating login
+    String userRole = getUserRole(username, password);
+
+    if (userRole != null) {
+        // Successfully authenticated, pass the role to the Menu screen
+            Menu menu = new Menu(userRole);  // Pass user role (Admin or Guest)
+            menu.setVisible(true);  // Show the Menu
+            this.dispose();  // Close the login page
+        } else {
+            // Show error message for invalid credentials or inactive account
+            JOptionPane.showMessageDialog(this, "Your account is deactivated or credentials are incorrect.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private boolean validateLogin(String username, String password) {
+        String query = "SELECT role FROM admin WHERE username = ? AND password = ?"
+                     + " UNION "
+                     + "SELECT role FROM GuestUser WHERE username = ? AND password = ?";
+
+        try (Connection con = DriverManager.getConnection(
+                "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                "csiadmin", "7ousRespo3!");
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            // Set parameters for the query
+            pst.setString(1, username);   // Admin username
+            pst.setString(2, password);   // Admin password
+            pst.setString(3, username);   // GuestUser username
+            pst.setString(4, password);   // GuestUser password
+
+            // Execute the query and check result
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String role = rs.getString("role");
+
+                // If the role is either "Admin" or "Guest User", return true
+                if ("Admin".equals(role) || "Guest User".equals(role)) {
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid user role", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid login credentials", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
+    /*
+    private String getUserRole(String username, String password) {
+        String role = null;  // Default to null if no role found
+        String query = "SELECT role FROM admin WHERE username = ? AND password = ? " +
+                       "UNION SELECT role FROM GuestUser WHERE username = ? AND password = ?";
+
+        try (Connection con = DriverManager.getConnection("jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                "csiadmin", "7ousRespo3!")) {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, username);
+            pst.setString(4, password);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return role;  // Return role (either Admin or Guest)
+    
+    }
+    */
+    private String getUserRole(String username, String password) {
+        String role = null;  // Default to null if no role found
+        String query = "SELECT role, accountStatus FROM admin WHERE username = ? AND password = ? AND accountStatus = 'Active' " +
+                       "UNION SELECT role, accountStatus FROM GuestUser WHERE username = ? AND password = ? AND accountStatus = 'Active'";
+
+        try (Connection con = DriverManager.getConnection("jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                "csiadmin", "7ousRespo3!")) {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, username);
+            pst.setString(4, password);
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return role;  // Return role (either Admin or Guest) if active, or null if inactive
+    }
+
+    
+    
+    
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         //Menu mm = new Menu();
@@ -195,8 +384,8 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField loginPassword;
+    private javax.swing.JTextField loginUsername;
     private javax.swing.JPanel pane;
     // End of variables declaration//GEN-END:variables
 }

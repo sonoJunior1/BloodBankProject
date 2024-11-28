@@ -4,6 +4,21 @@
  */
 package BloodBankManagement;
 
+import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Souleymane.Sono
@@ -13,9 +28,301 @@ public class Inventory extends javax.swing.JInternalFrame {
     /**
      * Creates new form Inventory
      */
+    private JTable donorTable;
     public Inventory() {
         initComponents();
+
+        // Initialize the donor table
+        donorTable = new JTable();
+        DefaultTableModel model = new DefaultTableModel(
+                new Object[]{"Blood ID", "Full Name", "Blood Type", "Collection Date", "Collected By", "Expiration Date"},
+                0
+        );
+        donorTable.setModel(model);
+        ScrollPane.setViewportView(donorTable);
+
+        // Add action listeners for buttons
+        setupBloodTypeButtons();
+        checkExpirationDates();
+
+        // Initially populate with all data
+        //populateData(null); 
     }
+    
+    private void promptRemoveExpiredBlood() {
+        // Block the application until expired blood is removed
+        JOptionPane.showMessageDialog(null, 
+            "Some blood is expired or about to expire. You must remove it to continue.", 
+            "Action Required", JOptionPane.ERROR_MESSAGE);
+
+        while (true) {
+            // Prompt for credentials
+            String username = JOptionPane.showInputDialog(null, "Enter admin username:");
+            String password = JOptionPane.showInputDialog(null, "Enter admin password:");
+
+            if (validateAdminCredentials(username, password)) {
+                removeExpiredBlood();
+                JOptionPane.showMessageDialog(null, 
+                    "Expired blood removed successfully.", 
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                    "Invalid credentials. Try again.", 
+                    "Authentication Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    
+    private boolean validateAdminCredentials(String username, String password) {
+        String query = "SELECT COUNT(*) AS count " +
+                       "FROM admin " +
+                       "WHERE username = ? AND password = ?";
+
+        String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                                  "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                                  "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String dbUsername = "csiadmin"; // Replace with your DB username
+        String dbPassword = "7ousRespo3!"; // Replace with your DB password
+
+        try (Connection con = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("count") > 0;
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return false; // Return false if credentials don't match
+    }
+    
+    
+    
+    private void removeExpiredBlood() {
+        String query = "DELETE FROM Inventory WHERE ExpirationDate <= CAST(GETDATE() AS DATE)";
+
+        String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                                  "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                                  "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String username = "csiadmin"; // Replace with your DB username
+        String password = "7ousRespo3!"; // Replace with your DB password
+
+        try (Connection con = DriverManager.getConnection(connectionString, username, password);
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
+            int rowsDeleted = pstmt.executeUpdate();
+            System.out.println(rowsDeleted + " expired blood record(s) removed.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("Error removing expired blood: " + ex.getMessage());
+        }
+    }
+
+
+
+    
+    
+    
+    private void checkExpirationDates() {
+        String query = "SELECT BloodID, ExpirationDate " +
+                       "FROM Inventory";
+
+        String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                                  "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                                  "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String username = "csiadmin"; // Replace with your DB username
+        String password = "7ousRespo3!"; // Replace with your DB password
+
+        try (Connection con = DriverManager.getConnection(connectionString, username, password);
+             PreparedStatement pstmt = con.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            boolean blockApp = false;
+
+            while (rs.next()) {
+                String bloodID = rs.getString("BloodID");
+                String expirationDateStr = rs.getString("ExpirationDate");
+
+                // Parse the expiration date
+                LocalDate expirationDate = LocalDate.parse(expirationDateStr);
+                LocalDate today = LocalDate.now();
+                long daysToExpire = ChronoUnit.DAYS.between(today, expirationDate);
+
+                if (daysToExpire == 3) {
+                    JOptionPane.showMessageDialog(null, 
+                        "Blood ID: " + bloodID + " is expiring in 3 days!", 
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+                } else if (daysToExpire <= 1) {
+                    blockApp = true;
+                }
+            }
+
+            if (blockApp) {
+                promptRemoveExpiredBlood();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("Error checking expiration dates: " + ex.getMessage());
+        }
+    }
+
+    
+    private void setupBloodTypeButtons() {
+        Aplus.addActionListener(e -> populateData("A+"));
+        Aminus.addActionListener(e -> populateData("A-"));
+        Bplus.addActionListener(e -> populateData("B+"));
+        Bminus.addActionListener(e -> populateData("B-"));
+        Oplus.addActionListener(e -> populateData("O+"));
+        Ominus.addActionListener(e -> populateData("O-"));
+        ABplus.addActionListener(e -> populateData("AB+"));
+        ABminus.addActionListener(e -> populateData("AB-"));
+        ShowAll.addActionListener(e -> retrieveAllData());
+    }
+
+    private void retrieveAllData() {
+    String query = "SELECT " +
+            "CONCAT(i.Firstname, ' ', i.Lastname) AS full_name, " +
+            "i.BloodID, " +
+            "i.CollectionDate, " +
+            "i.collectedBy, " +
+            "i.ExpirationDate, " +
+            "i.BloodType " +
+            "FROM Inventory i";
+
+    String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                              "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                              "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    String username = "csiadmin"; // Replace with your DB username
+    String password = "7ousRespo3!"; // Replace with your DB password
+
+    try (Connection con = DriverManager.getConnection(connectionString, username, password);
+         PreparedStatement pstmt = con.prepareStatement(query);
+         ResultSet rs = pstmt.executeQuery()) {
+
+        DefaultTableModel tableModel = (DefaultTableModel) donorTable.getModel();
+        tableModel.setRowCount(0); // Clear the table before adding rows
+
+        while (rs.next()) {
+            String bloodID = rs.getString("BloodID");
+            String fullName = rs.getString("full_name");
+            String bloodType = rs.getString("BloodType");
+            String collectionDate = rs.getString("CollectionDate");
+            String collectedBy = rs.getString("collectedBy");
+            String expirationDate = rs.getString("ExpirationDate");
+
+            tableModel.addRow(new Object[]{bloodID, fullName, bloodType, collectionDate, collectedBy, expirationDate});
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        throw new RuntimeException("Error retrieving all data: " + ex.getMessage());
+    }
+}
+
+   
+    private void populateData(String bloodTypeFilter) {
+        String baseQuery = "SELECT " +
+                "CONCAT(i.Firstname, ' ', i.Lastname) AS full_name, " +
+                "i.BloodID, " +
+                "i.CollectionDate, " +
+                "i.collectedBy, " +
+                "i.ExpirationDate, " +
+                "i.BloodType " +
+                "FROM Inventory i";
+
+        // Append filter condition if a blood type is provided
+        String query = bloodTypeFilter != null ? baseQuery + " WHERE i.BloodType = ?" : baseQuery;
+
+        String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String username = "csiadmin";
+        String password = "7ousRespo3!";
+
+        try (Connection con = DriverManager.getConnection(connectionString, username, password);
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+
+            // Set the blood type parameter if filtering
+            if (bloodTypeFilter != null) {
+                pstmt.setString(1, bloodTypeFilter);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                DefaultTableModel tableModel = (DefaultTableModel) donorTable.getModel();
+                tableModel.setRowCount(0); // Clear existing rows
+
+                // Populate the table with rows from the result set
+                while (rs.next()) {
+                    String bloodID = rs.getString("BloodID");
+                    String fullName = rs.getString("full_name");
+                    String bloodType = rs.getString("BloodType");
+                    String collectionDate = rs.getString("CollectionDate");
+                    String collectedBy = rs.getString("collectedBy");
+                    String expirationDate = rs.getString("ExpirationDate");
+
+                    tableModel.addRow(new Object[]{bloodID, fullName, bloodType, collectionDate, collectedBy, expirationDate});
+                }
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error retrieving data: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    /*
+    public void filterByBloodType(String bloodType){
+        String query = "SELECT" +
+                 "CONCAT(i.Firstname, ' ', i.Lastname) AS full_name, "+
+                 "i.BloodID, "+
+                 "i.collectionDate,"+
+                 "i.collectedBy,"+
+                 "i.ExpirationDate,"+
+                 "i.BloodType,"+
+                 "FROM Inventory i WHERE i.BloodType= ?";
+        
+        
+        String connectionString = "jdbc:sqlserver://bloodbankdata.database.windows.net:1433;" +
+                                  "database=bloodBank;encrypt=true;trustServerCertificate=false;" +
+                                  "hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String username = "csiadmin";  // Replace with your DB username
+        String password = "7ousRespo3!";  // Replace with your DB password
+
+        try(Connection con = DriverManager.getConnection(connectionString, username, password );
+            PreparedStatement pstmt = con.prepareStatement(query)){
+            pstmt.setString(1, bloodType);
+            try(ResultSet rs = pstmt.executeQuery()){
+                DefaultTableModel tableModel = (DefaultTableModel)donorTable.getModel();
+                tableModel.setRowCount(0);
+
+
+               while(rs.next()){
+                    String bloodID = rs.getString("BloodID");
+                    String fullName = rs.getString("full_name");
+                    String collectionDate = rs.getString("CollectionDate");
+                    String collectedBy = rs.getString("collectedBy");
+                    String expirationDate = rs.getString("ExpirationDate");
+
+                    tableModel.addRow(new Object[]{bloodID, fullName, bloodType, collectionDate, collectedBy, expirationDate});
+
+
+               }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            throw new RuntimeException("Error Retrieving filtered data" + ex.getMessage());
+        }
+         
+    }
+    */
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,18 +333,19 @@ public class Inventory extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Aminus = new javax.swing.JButton();
+        ABplus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        Bplus = new javax.swing.JButton();
+        Oplus = new javax.swing.JButton();
+        Aplus = new javax.swing.JButton();
+        Ominus = new javax.swing.JButton();
+        Bminus = new javax.swing.JButton();
+        ABminus = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        ShowAll = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        InventoryPane = new javax.swing.JLabel();
+        ScrollPane = new javax.swing.JScrollPane();
 
         setClosable(true);
         setIconifiable(true);
@@ -46,133 +354,145 @@ public class Inventory extends javax.swing.JInternalFrame {
         setTitle("Inventory");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/B+.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Aminus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AminusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 140, 130));
+        getContentPane().add(Aminus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 140, 130));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AB+.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ABplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ABplusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 140, 130));
+        getContentPane().add(ABplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 140, 130));
 
         jLabel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 24), new java.awt.Color(204, 0, 0))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1550, 70));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/A-.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Bplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BplusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, 130));
+        getContentPane().add(Bplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, 130));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/O+.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Oplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                OplusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 140, 130));
+        getContentPane().add(Oplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 140, 130));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/A+.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Aplus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                AplusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 130));
+        getContentPane().add(Aplus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 130));
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/O+.png"))); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        Ominus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                OminusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 140, 130));
+        getContentPane().add(Ominus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 140, 130));
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/B-.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        Bminus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                BminusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 140, 130));
+        getContentPane().add(Bminus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 140, 130));
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AB-.png"))); // NOI18N
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        ABminus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                ABminusActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 140, 130));
+        getContentPane().add(ABminus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 140, 130));
 
         jButton9.setBackground(new java.awt.Color(204, 0, 0));
         jButton9.setFont(new java.awt.Font("Bahnschrift", 1, 20)); // NOI18N
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("Exit");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 870, 90, 30));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 860, 90, 30));
+
+        ShowAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ShowAll.setText("Show All");
+        getContentPane().add(ShowAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 760, 160, 40));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Blood Type", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bahnschrift", 0, 18), new java.awt.Color(204, 0, 0))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 360, 810));
-        getContentPane().add(InventoryPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 1190, 790));
+        getContentPane().add(ScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 1170, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AminusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AminusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AminusActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ABplusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABplusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ABplusActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BplusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BplusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BplusActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void OplusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OplusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_OplusActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void AplusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AplusActionPerformed
+        // TODO add your handling code here:
+       
+        
+        
+       
+        
+                                   
+        
+        
+    }//GEN-LAST:event_AplusActionPerformed
+
+    private void OminusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OminusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OminusActionPerformed
+
+    private void BminusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BminusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BminusActionPerformed
+
+    private void ABminusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABminusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ABminusActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         
-        InventoryAplus iAplus = new InventoryAplus();
-        InventoryPane.add(iAplus).setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel InventoryPane;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton ABminus;
+    private javax.swing.JButton ABplus;
+    private javax.swing.JButton Aminus;
+    private javax.swing.JButton Aplus;
+    private javax.swing.JButton Bminus;
+    private javax.swing.JButton Bplus;
+    private javax.swing.JButton Ominus;
+    private javax.swing.JButton Oplus;
+    private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JButton ShowAll;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

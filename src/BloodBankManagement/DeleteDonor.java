@@ -39,7 +39,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         searchFieldLastName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         searchFieldDOB = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -93,10 +93,10 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         searchFieldLastName.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
         searchFieldLastName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -121,7 +121,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(searchFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53))))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -138,7 +138,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
                         .addComponent(searchFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -339,7 +339,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     }
 
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
             Connection con = null;
             PreparedStatement search = null;
             ResultSet rs = null;
@@ -407,7 +407,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         Connection con = null;
@@ -479,7 +479,6 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel email;
     private javax.swing.JLabel first;
     private javax.swing.JLabel gender;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -502,6 +501,7 @@ public class DeleteDonor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel last1;
     private javax.swing.JLabel middle;
     private javax.swing.JLabel place1;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchFieldDOB;
     private javax.swing.JTextField searchFieldLastName;
     private javax.swing.JLabel state1;
