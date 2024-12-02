@@ -64,7 +64,6 @@ public class AddBlood extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         first1 = new javax.swing.JLabel();
-        BloodClass = new javax.swing.JLabel();
         CollectionbyF3 = new javax.swing.JLabel();
         CollAddress = new javax.swing.JTextField();
         FirstnameField2 = new javax.swing.JTextField();
@@ -75,7 +74,7 @@ public class AddBlood extends javax.swing.JInternalFrame {
         CollTime = new javax.swing.JLabel();
         CollectionbyLast = new javax.swing.JLabel();
         CollectorFirst = new javax.swing.JLabel();
-        PrintPane = new javax.swing.JLabel();
+        BloodClass = new javax.swing.JLabel();
         PanelToPrint = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         CollectionField = new javax.swing.JLabel();
@@ -99,8 +98,12 @@ public class AddBlood extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         CollectionDate2 = new javax.swing.JLabel();
+        PrintPane = new javax.swing.JLabel();
 
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         printButton.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
@@ -173,9 +176,6 @@ public class AddBlood extends javax.swing.JInternalFrame {
         first1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         getContentPane().add(first1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 290, 30));
 
-        BloodClass.setFont(new java.awt.Font("Arial", 1, 300)); // NOI18N
-        getContentPane().add(BloodClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1640, 230, 230, 260));
-
         CollectionbyF3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         CollectionbyF3.setText("Collected Time:");
         getContentPane().add(CollectionbyF3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 860, 140, 40));
@@ -209,8 +209,8 @@ public class AddBlood extends javax.swing.JInternalFrame {
         CollectorFirst.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         getContentPane().add(CollectorFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 750, 130, 40));
 
-        PrintPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(PrintPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 30, 860, 1020));
+        BloodClass.setFont(new java.awt.Font("Arial", 1, 300)); // NOI18N
+        getContentPane().add(BloodClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1640, 230, 230, 260));
 
         PanelToPrint.setBackground(new java.awt.Color(249, 249, 249));
         PanelToPrint.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 0), 1, true));
@@ -304,6 +304,9 @@ public class AddBlood extends javax.swing.JInternalFrame {
         CollectionDate2.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         getContentPane().add(CollectionDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 710, 290, 40));
 
+        PrintPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(PrintPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 30, 860, 1020));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -320,10 +323,11 @@ public class AddBlood extends javax.swing.JInternalFrame {
         ResultSet rs = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection("jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
 
-            String query = "SELECT * FROM registration WHERE idRegistration = ? OR lastname = ?";
+            String query = "SELECT * FROM Registration WHERE DonorID = ? OR LastName = ?";
             String donorValue = searchField.getText();  // Corrected typo from `searchFiedl` to `searchField`
             search = con.prepareStatement(query);
             search.setString(1, donorValue);
@@ -333,14 +337,14 @@ public class AddBlood extends javax.swing.JInternalFrame {
 
             if (rs.next()) {
                 // Populate fields with the found donor's data
-                first1.setText(rs.getString("firstname"));
-                last.setText(rs.getString("lastname"));
+                first1.setText(rs.getString("FirstName"));
+                last.setText(rs.getString("LastName"));
                 //middle.setText(rs.getString("middlename"));
                 //gender.setText(rs.getString("gender"));
-                bloodtype.setText(rs.getString("bloodtype"));
+                bloodtype.setText(rs.getString("BloodType"));
                 //addr.setText(rs.getString("address"));
                 //city.setText(rs.getString("city"));
-                String dobString = rs.getString("dob");
+                String dobString = rs.getString("DateOfBirth");
                 
                 SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -415,11 +419,12 @@ public class AddBlood extends javax.swing.JInternalFrame {
         ResultSet rs = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbankdata", "root", "root");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con = DriverManager.getConnection("jdbc:sqlserver://bloodbankdata.database.windows.net:1433;database=bloodBank;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+                    "csiadmin", "7ousRespo3!");
 
             // SQL query to find donor by ID or Lastname
-            String query = "SELECT * FROM registration WHERE idRegistration = ? OR lastname = ?";
+            String query = "SELECT * FROM Registration WHERE DonorID = ? OR LastName = ?";
             String donorValue = searchField.getText();  // Get input from search field
 
             search = con.prepareStatement(query);
@@ -430,13 +435,13 @@ public class AddBlood extends javax.swing.JInternalFrame {
 
             if (rs.next()) {
                 // Populate fields with the donor's information
-                volFist.setText(rs.getString("firstname"));  // Set Firstname
-                volLast.setText(rs.getString("lastname"));   // Set Lastname
+                volFist.setText(rs.getString("FirstName"));  // Set Firstname
+                volLast.setText(rs.getString("LastName"));   // Set Lastname
                 
                 
 
                 // Check and set blood type
-                String bloodType = rs.getString("bloodtype");
+                String bloodType = rs.getString("BloodType");
                 if (bloodType != null) {
                     if (bloodType.equals("A+")) {
                         BloodTypeField.setText("Rh Positive");

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package BloodBankManagement;
 
 import java.awt.BorderLayout;
@@ -31,6 +28,17 @@ public class Inventory extends javax.swing.JInternalFrame {
     private JTable donorTable;
     public Inventory() {
         initComponents();
+        Aplus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/A+.png")));
+        Aminus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/A-.png")));
+        
+        Bplus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/B+.png")));
+        Bminus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/B-.png")));
+        
+        ABplus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/AB+.png")));
+        ABminus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/AB-.png")));
+        
+        Oplus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/O+.png")));
+        Ominus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/O-.png")));
 
         // Initialize the donor table
         donorTable = new JTable();
@@ -347,6 +355,7 @@ public class Inventory extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
 
+        setBackground(new java.awt.Color(204, 0, 51));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -424,7 +433,9 @@ public class Inventory extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 860, 90, 30));
 
+        ShowAll.setBackground(new java.awt.Color(204, 0, 0));
         ShowAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ShowAll.setForeground(new java.awt.Color(255, 255, 255));
         ShowAll.setText("Show All");
         getContentPane().add(ShowAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 760, 160, 40));
 
@@ -478,6 +489,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        
         
     }//GEN-LAST:event_jButton9ActionPerformed
 

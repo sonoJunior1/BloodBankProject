@@ -72,8 +72,8 @@ public class AddingBloodtoStock extends javax.swing.JInternalFrame {
         jLabel17 = new javax.swing.JLabel();
         dateExpiration = new de.wannawork.jcalendar.JCalendarComboBox();
         Clear = new javax.swing.JButton();
+        Addd = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
-        Add = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -178,8 +178,19 @@ public class AddingBloodtoStock extends javax.swing.JInternalFrame {
         Clear.setText("Clear");
         jPanel1.add(Clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 750, 120, 40));
 
+        Addd.setBackground(new java.awt.Color(0, 204, 51));
+        Addd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Addd.setForeground(new java.awt.Color(255, 255, 255));
+        Addd.setText("Add");
+        Addd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdddActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Addd, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 750, 120, 40));
+
         Exit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Exit.setForeground(new java.awt.Color(255, 0, 0));
+        Exit.setForeground(new java.awt.Color(255, 0, 51));
         Exit.setText("Exit");
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,17 +198,6 @@ public class AddingBloodtoStock extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 750, 120, 40));
-
-        Add.setBackground(new java.awt.Color(0, 255, 0));
-        Add.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Add.setForeground(new java.awt.Color(255, 255, 255));
-        Add.setText("Add");
-        Add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 750, 120, 40));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Blood to Stock", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, 1364, 837));
@@ -227,7 +227,7 @@ public class AddingBloodtoStock extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_collectorIDActionPerformed
 
-    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+    private void AdddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdddActionPerformed
         // TODO add your handling code here:
         // Ensure you get the date as a string from the DatePicker
             Date date = dob1.getDate();
@@ -316,15 +316,16 @@ public class AddingBloodtoStock extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage());
                 Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }//GEN-LAST:event_ExitActionPerformed
+    }//GEN-LAST:event_AdddActionPerformed
 
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddActionPerformed
+        
+    }//GEN-LAST:event_ExitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
+    private javax.swing.JButton Addd;
     private javax.swing.JButton Clear;
     private javax.swing.JButton Exit;
     private javax.swing.JTextField Qty;

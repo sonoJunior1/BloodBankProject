@@ -47,8 +47,8 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="529" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="654" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
@@ -60,8 +60,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="81" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" pref="432" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" pref="475" max="-2" attributes="0"/>
                   <EmptySpace pref="125" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -87,18 +87,13 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/BloodBankManagement/blood.png"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pane">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="809" y="0" width="-1" height="-1"/>
+          <AbsoluteConstraints x="800" y="330" width="520" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -122,7 +117,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="138" max="32767" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,5 +196,12 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="loginIcon">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="880" y="130" width="440" height="340"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>

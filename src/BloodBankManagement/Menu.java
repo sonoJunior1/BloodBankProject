@@ -125,6 +125,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem11.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jMenuItem11.setText("Profile");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem11);
 
         jMenuItem12.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -276,6 +281,16 @@ public class Menu extends javax.swing.JFrame {
         UserProfile up = new UserProfile();
         Desktop.add(up).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        ActivityLog Al = new ActivityLog();
+        Desktop.add(Al).setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
     
     public void disableAdminMenu() {
         AdminPane.setEnabled(false);  // Disables the AdminPane
