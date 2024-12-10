@@ -1,0 +1,118 @@
+Dec 10, 2024 11:32:41 AM BloodBankManagement.AppLogger logWarning
+WARNING: 2FA code sent to user: sonoAdmin at 2024-12-10T11:32:41.041579200
+Dec 10, 2024 11:33:44 AM BloodBankManagement.AppLogger logInfo
+INFO: User sonoAdmin logged in at 2024-12-10T11:33:44.633481700
+Dec 10, 2024 11:33:56 AM BloodBankManagement.AppLogger logInfo
+INFO: Add Button Performed  at 2024-12-10T11:33:56.047089400
+Dec 10, 2024 11:33:59 AM BloodBankManagement.AppLogger logInfo
+INFO: Donor Information Upadted  2024-12-10T11:33:59.844875700
+Dec 10, 2024 11:34:03 AM BloodBankManagement.AppLogger logInfo
+INFO: Donor Removed at 2024-12-10T11:34:03.650954300
+Dec 10, 2024 11:34:07 AM BloodBankManagement.AppLogger logInfo
+INFO: Viewed List of Donors at  2024-12-10T11:34:07.007886900
+Dec 10, 2024 11:34:12 AM BloodBankManagement.AppLogger logInfo
+INFO: Closed at  2024-12-10T11:34:12.768706700
+Dec 10, 2024 11:54:32 AM BloodBankManagement.AppLogger logInfo
+INFO: Expired blood with ID: 133 has expired. Do you want to remove it? 2024-12-10T11:54:32.379858500
+Dec 10, 2024 11:54:32 AM BloodBankManagement.AppLogger logInfo
+INFO: removed successfully.1332024-12-10T11:54:32.406716800
+Dec 10, 2024 3:24:15 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 135 at 2024-12-10
+Dec 10, 2024 3:24:15 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 136 at 2024-12-10
+Dec 10, 2024 3:30:36 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 135 at 2024-12-10
+Dec 10, 2024 3:30:36 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 136 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 137 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 138 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 139 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 140 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 141 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 142 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 143 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 144 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 145 at 2024-12-10
+Dec 10, 2024 3:39:49 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 146 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 147 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 148 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 149 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 150 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 151 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 152 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 153 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 154 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 155 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 156 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 157 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 158 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 159 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 160 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 161 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 162 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 163 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 164 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 165 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 166 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 167 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 168 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 169 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 170 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 171 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 172 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 173 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 174 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 175 at 2024-12-10
+Dec 10, 2024 3:59:21 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 176 at 2024-12-10
+Dec 10, 2024 4:03:12 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 177 at 2024-12-10
+Dec 10, 2024 4:03:31 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 177 at 2024-12-10
+Dec 10, 2024 4:07:36 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 177 at 2024-12-10
+Dec 10, 2024 4:11:58 PM BloodBankManagement.AppLogger logWarning
+WARNING: Expired blood detected: ID 177 at 2024-12-10
+Dec 10, 2024 4:17:37 PM BloodBankManagement.AppLogger logWarning
+WARNING: 2FA code sent to user: sonoAdmin at 2024-12-10T16:17:37.163663800
+Dec 10, 2024 4:18:02 PM BloodBankManagement.AppLogger logInfo
+INFO: User sonoAdmin logged in at 2024-12-10T16:18:02.897800800
